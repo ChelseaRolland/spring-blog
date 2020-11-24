@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rolling Dice</title>
+</head>
+<body>
+    <header th:replace="partials/partials :: header"></header>
+    <h1>Can you guess the how the dice will roll?</h1>
+    <form action="/roll-dice" method="get">
+        <button class="btn btn-primary btn-small" name="1" value="1">1</button>
+        <button class="btn btn-primary btn-small" name="2" value="2">2</button>
+        <button class="btn btn-primary btn-small" name="3" value="3">3</button>
+        <button class="btn btn-primary btn-small" name="4" value="4">4</button>
+        <button class="btn btn-primary btn-small" name="5" value="5">5</button>
+        <button class="btn btn-primary btn-small" name="6" value="6">6</button>
+    </form>
+
+    <hr>
+
+    <footer th:replace="partials/partials :: footer"></footer>
+</body>
+</html>

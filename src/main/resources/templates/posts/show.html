@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Individual Ad Info</title>
 </head>
 <body>
+<div class="container">
+    <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${currentPost.getTitle()}"></h5>
+            <p class="card-text" th:text="${currentPost.getBody()}"></p>
+            <small th:text="${currentPost.getCreateTime()}"></small>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

@@ -8,6 +8,10 @@ public class Post {
 
     public Post(){}
 
+    public Post(long id) {
+        this.id = id;
+    }
+
     public Post(String aTitle, String aBody){
         this.title = aTitle;
         this.body = aBody;

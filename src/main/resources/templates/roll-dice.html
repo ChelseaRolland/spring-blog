@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials/partials :: head">
+<head th:include="partials/partials :: head">
     <title>Rolling Dice</title>
 </head>
 <body>
@@ -21,12 +21,18 @@
 
     <hr>
     <form action="/roll-dice" method="post">
-        <button type="button" class="btn btn-outline-info" th:name="1" th:value="1">1</button>
-        <button type="button" class="btn btn-outline-info" th:name="2" th:value="2">2</button>
-        <button type="button" class="btn btn-outline-info" th:name="3" th:value="3">3</button>
-        <button type="button" class="btn btn-outline-info" th:name="4" th:value="4">4</button>
-        <button type="button" class="btn btn-outline-info" th:name="5" th:value="5">5</button>
-        <button type="button" class="btn btn-outline-info" th:name="6" th:value="6">6</button>
+        <input type="hidden" name="btn1" id="btn1" th:value="1"/>
+        <button type="button" class="btn btn-outline-info" th:name="btn1" th:value="1">1</button>
+        <input type="hidden" name="btn2" id="btn2" th:value="2"/>
+        <button type="button" class="btn btn-outline-info" th:name="btn2" th:value="2">2</button>
+        <input type="hidden" name="btn3" id="btn3" th:value="3"/>
+        <button type="button" class="btn btn-outline-info" th:name="btn3" th:value="3">3</button>
+        <input type="hidden" name="btn4" id="btn4" th:value="4"/>
+        <button type="button" class="btn btn-outline-info" th:name="btn4" th:value="4">4</button>
+        <input type="hidden" name="btn5" id="btn5" th:value="5"/>
+        <button type="button" class="btn btn-outline-info" th:name="btn5" th:value="5">5</button>
+        <input type="hidden" name="btn6" id="btn6" th:value="6"/>
+        <button type="button" class="btn btn-outline-info" th:name="btn6" th:value="6">6</button>
     </form>
     <hr>
 

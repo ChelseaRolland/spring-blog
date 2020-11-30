@@ -46,9 +46,6 @@ public class RollingDiceController {
         Random random = new Random();
         int randomRoll = random.nextInt(6 - 1) + 1;
 
-
-
-
         return "/roll-dice";
     }
 

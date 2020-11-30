@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="partials/partials :: head">
-    <meta charset="UTF-8">
-    <title>Current Blogs</title>
+<head th:replace="partials/head :: head('All Posts')">
+    <title>All Blog Posts</title>
 </head>
 <body>
-    <nav th:replace="partials/partials :: nav"></nav>
+<nav th:replace="partials/navbar :: nav"></nav>
+<header th:replace="partials/header :: header('All the Posts!!')"></header>
 
     <div class="container">
 
-        <div th:each="post : ${posts}">
-            <div class="card text-center">
+        <div class= "card text-center" th:each="post : ${posts}">
                 <div class="card-body">
                     <h3 class="card-title" th:text="${post.title}"></h3>
                     <p class="card-text" th:text="${post.body}"></p>
@@ -19,12 +18,9 @@
                 <div class="card-footer text-muted">
                     2 days ago
                 </div>
-            </div>
         </div>
 
     </div>
-
-
 
     <footer th:replace="partials/partials :: footer"></footer>
 </body>

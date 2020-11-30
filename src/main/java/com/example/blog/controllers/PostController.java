@@ -14,24 +14,25 @@ import java.util.List;
 @Controller
 public class PostController {
 
-    @GetMapping("/posts/index")
+    @GetMapping("/posts")
     public String index(Model model){
         List<Post> blogPosts = new ArrayList<Post>();
         blogPosts.add(new Post("Day 1", "Time for back to school after the Thanksgiving Holiday Break"));
         blogPosts.add(new Post("So this is happening...", "Got 3 more weeks until I officially freak out about graduating as a software developer"));
+        blogPosts.add(new Post("Post 3", "Testing 3"));
 
         model.addAttribute("posts", blogPosts);
 
-        return "/posts/index";
+        return "posts/index";
     }
 
-    @GetMapping("/posts/show/{id}")
+    @GetMapping("/posts/{id}")
     public String individualPost(@PathVariable long id, Model model){
-        Post newPost = new Post(id);
+        Post newPost = new Post("Post " + id, "Some cool stuff " + id + ".");
 
         model.addAttribute("currentPost", newPost);
         System.out.println("view individual posts and the id is: " + id);
-        return "/posts/show";
+        return "posts/show";
     }
 
     @GetMapping("/posts/create") @ResponseBody

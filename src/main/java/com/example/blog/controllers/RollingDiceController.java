@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Controller
 public class RollingDiceController {
@@ -21,23 +22,15 @@ public class RollingDiceController {
         //Bound the random number from 1 - 6
         int randomRoll = random.nextInt(6 - 1) + 1;
 
+        int randomNum = ThreadLocalRandom.current().nextInt(1,6 + 1);
+
         //Compare the guessed value to the random number roll
         //Set/Add the attributes on the /roll-page so we can see the results from users guess, random number for roll, and comparing results into an attribute
-        model.addAttribute("isCorrectGuess", randomRoll == guess);
         model.addAttribute("userGuess", guess);
         model.addAttribute("randomNumber", randomRoll);
+        model.addAttribute("isCorrectGuess", randomRoll == guess);
 
         return "/roll-dice";
-    }
-
-    @RequestMapping(value = "/roll-dice", params = "1", method = RequestMethod.POST)
-    public void btn1(){
-        System.out.println("Btn 1 was called");
-    }
-
-    @RequestMapping(value = "/roll-dice", params = "2", method = RequestMethod.POST)
-    public void btn2(){
-        System.out.println("Btn 2 was called");
     }
 
     @PostMapping("/roll-dice")
@@ -47,6 +40,37 @@ public class RollingDiceController {
         int randomRoll = random.nextInt(6 - 1) + 1;
 
         return "/roll-dice";
+    }
+
+//Button Selections
+    @RequestMapping(value = "/roll-dice", params = "btn1", method = RequestMethod.POST)
+    public void btn1(){
+        System.out.println("Btn 1 was called");
+    }
+
+    @RequestMapping(value = "/roll-dice", params = "btn2", method = RequestMethod.POST)
+    public void btn2(){
+        System.out.println("Btn 2 was called");
+    }
+
+    @RequestMapping(value = "/roll-dice", params = "btn3", method = RequestMethod.POST)
+    public void btn3(){
+        System.out.println("Btn 3 was called");
+    }
+
+    @RequestMapping(value = "/roll-dice", params = "btn4", method = RequestMethod.POST)
+    public void btn4(){
+        System.out.println("Btn 4 was called");
+    }
+
+    @RequestMapping(value = "/roll-dice", params = "btn5", method = RequestMethod.POST)
+    public void btn5(){
+        System.out.println("Btn 5 was called");
+    }
+
+    @RequestMapping(value = "/roll-dice", params = "btn6", method = RequestMethod.POST)
+    public void btn6(){
+        System.out.println("Btn 6 was called");
     }
 
 }

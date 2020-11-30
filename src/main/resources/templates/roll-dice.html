@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="partials/partials :: head">
+<head th:replace="partials/head :: head('Rolling Dice')">
     <title>Rolling Dice</title>
 </head>
 <body>
-<header>
-    <nav th:replace="partials/partials :: nav"></nav>
-</header>
+    <nav th:replace="partials/navbar :: nav"></nav>
+    <header th:replace="partials/header :: header('Roll the Dice!!')"></header>
 <div class="container text-center">
     <h1>Can you guess the how the dice will roll?</h1>
 
     <hr>
 
-    <a href="/roll-dice/1">1</a>
-    <a href="/roll-dice/2">2</a>
-    <a href="/roll-dice/3">3</a>
-    <a href="/roll-dice/4">4</a>
-    <a href="/roll-dice/5">5</a>
-    <a href="/roll-dice/6">6</a>
+    |
+    <a th:href="@{/roll-dice/1}">Guess 1</a> |
+    <a th:href="@{/roll-dice/2}">Guess 2</a> |
+    <a th:href="@{/roll-dice/3}">Guess 3</a> |
+    <a th:href="@{/roll-dice/4}">Guess 4</a> |
+    <a th:href="@{/roll-dice/5}">Guess 5</a> |
+    <a th:href="@{/roll-dice/6}">Guess 6</a> |
 
     <hr>
     <form action="/roll-dice" method="post">
+<!--        <div th:each="">-->
+<!--            <button th:text="${option}" name="option" th:value="${option}"></button>-->
+<!--        </div>-->
+
         <input type="hidden" name="btn1" id="btn1" th:value="1"/>
         <button type="button" class="btn btn-outline-info" th:name="btn1" th:value="1">1</button>
         <input type="hidden" name="btn2" id="btn2" th:value="2"/>
@@ -37,8 +41,8 @@
     <hr>
 
     <div th:if="${userGuess}">
-        Your guess was <span th:text="${userGuess}"></span>.
-        The rolled numbers is: <span th:text="${randomNumber}"></span>
+        Your guess was <span th:text="${userGuess}"></span> .<br>
+        The rolled numbers is: <span th:text="${randomNumber}"></span> .
     </div>
 
     <hr>
@@ -57,6 +61,7 @@
     </div>
 </div>
 <hr>
-<footer th:replace="partials/partials :: footer"></footer>
+    <footer th:replace="partials/partials :: footer"></footer>
+    <th:block th:include="partials/scripts :: scripts"></th:block>
 </body>
 </html>

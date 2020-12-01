@@ -28,19 +28,12 @@
 <!--    </form>-->
 
     <hr>
-    <form th:action="@{/roll-dice/1}" th:method="GET">
-        <button type="submit" class="btn btn-outline-info">1</button>
-    </form>
-        <input type="hidden" name="btn2" id="btn2" th:value="2"/>
-        <button type="button" class="btn btn-outline-info" th:name="btn2" th:value="2">2</button>
-        <input type="hidden" name="btn3" id="btn3" th:value="3"/>
-        <button type="button" class="btn btn-outline-info" th:name="btn3" th:value="3">3</button>
-        <input type="hidden" name="btn4" id="btn4" th:value="4"/>
-        <button type="button" class="btn btn-outline-info" th:name="btn4" th:value="4">4</button>
-        <input type="hidden" name="btn5" id="btn5" th:value="5"/>
-        <button type="button" class="btn btn-outline-info" th:name="btn5" th:value="5">5</button>
-        <input type="hidden" name="btn6" id="btn6" th:value="6"/>
-        <button type="button" class="btn btn-outline-info" th:name="btn6" th:value="6">6</button>
+        <button type="button" class="btn btn-outline-info" th:id="btn1" th:name="btn1" th:value="1">1</button>
+        <button type="button" class="btn btn-outline-info" th:id="btn2" th:name="btn2" th:value="2">2</button>
+        <button type="button" class="btn btn-outline-info" th:id="btn3" th:name="btn3" th:value="3">3</button>
+        <button type="button" class="btn btn-outline-info" th:id="btn4" th:name="btn4" th:value="4">4</button>
+        <button type="button" class="btn btn-outline-info" th:id="btn5" th:name="btn5" th:value="5">5</button>
+        <button type="button" class="btn btn-outline-info" th:id="btn6" th:name="btn6" th:value="6">6</button>
 
 <!--        <input th:type="submit" th:class="btn btn-outline-info" th:name="btn1" th:value="1" />-->
 
@@ -69,5 +62,49 @@
 <hr>
     <footer th:replace="partials/partials :: footer"></footer>
     <th:block th:include="partials/scripts :: scripts"></th:block>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var user = 'user';
+        console.log("Hello there :D");
+        let btn1 = document.querySelector("#btn1");
+        btn1.addEventListener("click", function(e){
+            console.log("Btn1 clicked");
+            document.location = /*[[@{/roll-dice/1}]]*/"";
+        });
+
+        let btn2 = document.querySelector("#btn2");
+        btn2.addEventListener("click", function(e){
+            console.log("Btn2 clicked");
+            document.location = /*[[@{/roll-dice/2}]]*/"";
+        });
+
+        let btn3 = document.querySelector("#btn3");
+        btn3.addEventListener("click", function(e){
+            console.log("Btn3 clicked");
+            document.location = /*[[@{/roll-dice/3}]]*/"";
+        });
+
+        let btn4 = document.querySelector("#btn4");
+        btn4.addEventListener("click", function(e){
+            console.log("Btn4 clicked");
+            document.location = /*[[@{/roll-dice/4}]]*/"";
+        });
+
+        let btn5 = document.querySelector("#btn5");
+        btn5.addEventListener("click", function(e){
+            console.log("Btn5 clicked");
+            document.location = /*[[@{/roll-dice/5}]]*/"";
+        });
+
+        let btn6 = document.querySelector("#btn6");
+        btn6.addEventListener("click", function(e){
+            console.log("Btn6 clicked");
+            document.location = /*[[@{/roll-dice/6}]]*/"";
+        });
+
+
+        /*]]>*/
+    </script>
+
 </body>
 </html>

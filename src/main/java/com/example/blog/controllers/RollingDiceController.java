@@ -36,7 +36,9 @@ public class RollingDiceController {
     }
 
     @PostMapping("/roll-dice")
-    public String rollDice2(Model model){
+    public String rollDice2(
+            @RequestParam(name = "btn1") int btn1,
+            Model model){
         //setting up random number
         Random random = new Random();
         int randomRoll = random.nextInt(6 - 1) + 1;

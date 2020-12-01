@@ -1,6 +1,7 @@
 package com.example.blog.controllers;
 
 import com.example.blog.modals.Post;
+import com.example.blog.modals.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,11 @@ import java.util.List;
 
 @Controller
 public class PostController {
+    private final PostRepository postsDao;
+
+    public PostController(PostRepository postsDao){
+        this.postsDao = postsDao;
+    }
 
     @GetMapping("/posts")
     public String index(Model model){
@@ -43,5 +49,17 @@ public class PostController {
     @PostMapping("/posts/create") @ResponseBody
     public String submitPost(){
         return "create new blog post";
+    }
+
+    @PostMapping("/posts/edit")
+    public String editPost(Model viewModel){
+
+        return "";
+    }
+
+    @PostMapping("/posts/delete")
+    public String deletePost(Model viewModel){
+
+        return "posts/index";
     }
 }

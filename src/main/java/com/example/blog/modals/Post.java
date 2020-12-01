@@ -1,16 +1,24 @@
 package com.example.blog.modals;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "posts")
 public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(nullable = false, length = 150)
     private String title;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
+
+    @Column(nullable = false, columnDefinition = "TIMESTAMP")
     private String createTime;
 
     public Post(){}
-
-    public Post(long id) {
-        this.id = id;
-    }
 
     public Post(String aTitle, String aBody){
         this.title = aTitle;

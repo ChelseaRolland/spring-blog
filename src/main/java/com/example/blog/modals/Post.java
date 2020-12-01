@@ -20,17 +20,20 @@ public class Post {
 
     public Post(){}
 
+    //Insert
     public Post(String aTitle, String aBody){
         this.title = aTitle;
         this.body = aBody;
     }
 
-    public Post(String title, String body, String createTime) {
+    //Update
+    public Post(long id, String title, String body) {
+        this.id = id;
         this.title = title;
         this.body = body;
-        this.createTime = createTime;
     }
 
+    //Search
     public Post(long id, String title, String body, String createTime) {
         this.id = id;
         this.title = title;

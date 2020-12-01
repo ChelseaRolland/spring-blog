@@ -1,13 +1,10 @@
 package com.example.blog.controllers;
 
 import com.example.blog.modals.Post;
-import com.example.blog.modals.PostRepository;
+import com.example.blog.repos.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +18,8 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public String index(Model model){
-        List<Post> blogPosts = new ArrayList<Post>();
-        blogPosts.add(new Post("Day 1", "Time for back to school after the Thanksgiving Holiday Break"));
-        blogPosts.add(new Post("So this is happening...", "Got 3 more weeks until I officially freak out about graduating as a software developer"));
-        blogPosts.add(new Post("Post 3", "Testing 3"));
-
-        model.addAttribute("posts", blogPosts);
-
+    public String index(Model viewModel){
+        viewModel.addAttribute("posts", postsDao.findAll());
         return "posts/index";
     }
 
@@ -41,24 +32,40 @@ public class PostController {
         return "posts/show";
     }
 
-    @GetMapping("/posts/create") @ResponseBody
+    @GetMapping("/posts/create")
     public String viewCreateForm(){
-        return "view the form for creating a blog post";
+        return "posts/new";
     }
 
     @PostMapping("/posts/create") @ResponseBody
-    public String submitPost(){
-        return "create new blog post";
+    public String submitPost(
+            @RequestParam(name = "title") String title,
+            @RequestParam(name = "body") String body
+    ){
+        Post post = new Post(title, body);
+        Post dbPost = postsDao.save(post);
+        return "create new blog post with id " + dbPost.getId();
     }
 
-    @PostMapping("/posts/edit")
-    public String editPost(Model viewModel){
 
-        return "";
+    @GetMapping("/posts/edit") @ResponseBody
+    public String viewEdit(){
+        return "this should be the page to edit the posts";
+    }
+
+    @PostMapping("/posts/edit") @ResponseBody
+    public String editPost(
+            @RequestParam(name = "postId") long id,
+            @RequestParam(name = "title") String title,
+            @RequestParam(name = "body") String body
+    ){
+            Post post = new Post(id, title, body);
+            Post dbPost = postsDao.save(post);
+        return "edited the post with the id of " + dbPost.getId();
     }
 
     @PostMapping("/posts/delete")
-    public String deletePost(Model viewModel){
+    public String deletePostById(@RequestParam(name = "postId") long id){
 
         return "posts/index";
     }

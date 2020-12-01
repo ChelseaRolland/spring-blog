@@ -20,13 +20,17 @@
     <a th:href="@{/roll-dice/6}">Guess 6</a> |
 
     <hr>
-    <form action="/roll-dice" method="post">
-<!--        <div th:each="">-->
-<!--            <button th:text="${option}" name="option" th:value="${option}"></button>-->
-<!--        </div>-->
 
-        <input type="hidden" name="btn1" id="btn1" th:value="1"/>
-        <button type="button" class="btn btn-outline-info" th:name="btn1" th:value="1">1</button>
+<!--    <form action="/roll-dice" method="post">-->
+<!--        <div th:each="option : ${buttonOptions}">-->
+<!--            <button th:text="${option}" name="option" th:value="${option}" th:class="btn btn-outline-info"></button>-->
+<!--        </div>-->
+<!--    </form>-->
+
+    <hr>
+    <form th:action="@{/roll-dice/1}" th:method="GET">
+        <button type="submit" class="btn btn-outline-info">1</button>
+    </form>
         <input type="hidden" name="btn2" id="btn2" th:value="2"/>
         <button type="button" class="btn btn-outline-info" th:name="btn2" th:value="2">2</button>
         <input type="hidden" name="btn3" id="btn3" th:value="3"/>
@@ -37,7 +41,9 @@
         <button type="button" class="btn btn-outline-info" th:name="btn5" th:value="5">5</button>
         <input type="hidden" name="btn6" id="btn6" th:value="6"/>
         <button type="button" class="btn btn-outline-info" th:name="btn6" th:value="6">6</button>
-    </form>
+
+<!--        <input th:type="submit" th:class="btn btn-outline-info" th:name="btn1" th:value="1" />-->
+
     <hr>
 
     <div th:if="${userGuess}">

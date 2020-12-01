@@ -12,8 +12,8 @@
                     <h3 class="card-title" th:text="${post.title}"></h3>
                     <p class="card-text" th:text="${post.body}"></p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
-                    <button type="submit" th:name="editBtn" th:id="editBtn" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-                    <button type="submit" th:name="deleteBtn" th:id="deleteBtn" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                    <a th:href="@{/posts/edit}" th:name="editBtn" th:id="editBtn" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                    <a th:href="@{/posts/delete}" th:name="deleteBtn" th:id="deleteBtn" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                 </div>
                 <div class="card-footer text-muted">
                     <th:block th:text="${post.createTime}"></th:block>

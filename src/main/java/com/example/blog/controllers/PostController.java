@@ -48,9 +48,11 @@ public class PostController {
     }
 
 
-    @GetMapping("/posts/edit") @ResponseBody
-    public String viewEdit(){
-        return "this should be the page to edit the posts";
+    @GetMapping("/posts/edit")
+    public String viewEdit(Model viewModel){
+        //Post post = new Post();
+        //viewModel.addAttribute("post", post);
+        return "posts/edit";
     }
 
     @PostMapping("/posts/edit") @ResponseBody
@@ -64,9 +66,16 @@ public class PostController {
         return "edited the post with the id of " + dbPost.getId();
     }
 
-    @PostMapping("/posts/delete")
-    public String deletePostById(@RequestParam(name = "postId") long id){
+    @GetMapping("/posts/delete")@ResponseBody
+    public String viewDelete(){
+        return "this is the delete page";
+    }
 
-        return "posts/index";
+    @PostMapping("/posts/delete") @ResponseBody
+    public String deletePostById(@RequestParam(name = "postId") long id){
+        //Post post = postsDao.delete();
+        postsDao.deleteById(id);
+        //postsDao.deletePostById(id);
+        return "deleted the post with the ID of" + id;
     }
 }

@@ -68,7 +68,7 @@ public class PostController {
         postsDao.save(dbPost);
 
         //redirect to the specific posts page
-        return "redirect:/posts/";
+        return "redirect:/posts/" + dbPost.getId();
     }
 
     @PostMapping("/posts/{id}/delete")

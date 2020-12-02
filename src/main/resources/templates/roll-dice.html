@@ -66,41 +66,60 @@
         /*<![CDATA[*/
         var user = 'user';
         console.log("Hello there :D");
-        let btn1 = document.querySelector("#btn1");
-        btn1.addEventListener("click", function(e){
-            console.log("Btn1 clicked");
-            document.location = /*[[@{/roll-dice/1}]]*/"";
-        });
+        // let btn1 = document.querySelector("#btn1");
+        // btn1.addEventListener("click", function(e){
+        //     console.log("Btn1 clicked");
+        //     document.location = /*[[@{/roll-dice/1}]]*/"";
+        // });
+        //
+        // let btn2 = document.querySelector("#btn2");
+        // btn2.addEventListener("click", function(e){
+        //     console.log("Btn2 clicked");
+        //     document.location = /*[[@{/roll-dice/2}]]*/"";
+        // });
+        //
+        // let btn3 = document.querySelector("#btn3");
+        // btn3.addEventListener("click", function(e){
+        //     console.log("Btn3 clicked");
+        //     document.location = /*[[@{/roll-dice/3}]]*/"";
+        // });
+        //
+        // let btn4 = document.querySelector("#btn4");
+        // btn4.addEventListener("click", function(e){
+        //     console.log("Btn4 clicked");
+        //     document.location = /*[[@{/roll-dice/4}]]*/"";
+        // });
+        //
+        // let btn5 = document.querySelector("#btn5");
+        // btn5.addEventListener("click", function(e){
+        //     console.log("Btn5 clicked");
+        //     document.location = /*[[@{/roll-dice/5}]]*/"";
+        // });
+        //
+        // let btn6 = document.querySelector("#btn6");
+        // btn6.addEventListener("click", function(e){
+        //     console.log("Btn6 clicked");
+        //     document.location = /*[[@{/roll-dice/6}]]*/"";
+        // });
 
-        let btn2 = document.querySelector("#btn2");
-        btn2.addEventListener("click", function(e){
-            console.log("Btn2 clicked");
-            document.location = /*[[@{/roll-dice/2}]]*/"";
-        });
-
-        let btn3 = document.querySelector("#btn3");
-        btn3.addEventListener("click", function(e){
-            console.log("Btn3 clicked");
-            document.location = /*[[@{/roll-dice/3}]]*/"";
-        });
-
-        let btn4 = document.querySelector("#btn4");
-        btn4.addEventListener("click", function(e){
-            console.log("Btn4 clicked");
-            document.location = /*[[@{/roll-dice/4}]]*/"";
-        });
-
-        let btn5 = document.querySelector("#btn5");
-        btn5.addEventListener("click", function(e){
-            console.log("Btn5 clicked");
-            document.location = /*[[@{/roll-dice/5}]]*/"";
-        });
-
-        let btn6 = document.querySelector("#btn6");
-        btn6.addEventListener("click", function(e){
-            console.log("Btn6 clicked");
-            document.location = /*[[@{/roll-dice/6}]]*/"";
-        });
+        for (let i = 1; i <= 6; i++){
+            document.querySelector("#btn"+i).addEventListener("click", function(e){
+                console.log("btn" + i + " has been clicked");
+                if(i === 1){
+                    document.location = /*[[@{/roll-dice/1}]]*/"";
+                }else if(i === 2){
+                    document.location = /*[[@{/roll-dice/2}]]*/"";
+                } else if(i === 3){
+                    document.location = /*[[@{/roll-dice/3}]]*/"";
+                } else if(i === 4){
+                    document.location = /*[[@{/roll-dice/4}]]*/"";
+                } else if(i === 5){
+                    document.location = /*[[@{/roll-dice/5}]]*/"";
+                } else if(i === 6){
+                    document.location = /*[[@{/roll-dice/6}]]*/"";
+                }
+            });
+        }
 
 
         /*]]>*/

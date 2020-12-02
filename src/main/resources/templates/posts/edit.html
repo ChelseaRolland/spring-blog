@@ -7,15 +7,15 @@
 <header th:replace="partials/header :: header('Edit Post')"></header>
 
 <div class="container text-center">
-    <form th:action="@{/posts/edit}" th:method="POST">
+    <form th:action="@{/posts/{id}/edit(id=${post.id})}" th:method="POST">
         <input name="postId" type="hidden">
         <div class="form-group">
             <label for="postTitle">Post Title</label>
-            <input name="title" type="text" class="form-control" id="postTitle" aria-describedby="postTitleHelp">
+            <input name="title" type="text" class="form-control" id="postTitle" aria-describedby="postTitleHelp" th:value="${post.title}">
         </div>
         <div class="form-group">
             <label for="postBody">Post Body</label>
-            <input name = "body" type="text" class="form-control" id="postBody">
+            <input name = "body" type="text" class="form-control" id="postBody" th:value="${post.body}">
         </div>
         <button type="submit" th:name="submitBtn" class="btn btn-primary">Submit</button>
         <button type="submit" th:name="deleteEditBtn" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>

@@ -48,22 +48,30 @@ public class PostController {
     }
 
 
-    @GetMapping("/posts/edit")
-    public String viewEdit(Model viewModel){
-        //Post post = new Post();
-        //viewModel.addAttribute("post", post);
+    @GetMapping("/posts/{id}/edit")
+    public String viewEditForm(@PathVariable long id, Model viewModel){
+        viewModel.addAttribute("post", postsDao.getOne(id));
         return "posts/edit";
     }
 
-    @PostMapping("/posts/edit") @ResponseBody
+    @PostMapping("/posts/{id}/edit") @ResponseBody
     public String editPost(
-            @RequestParam(name = "postId") long id,
+            //@RequestParam(name = "postId") long id, -->Anyone can change this so put it as/in your URL
+            @PathVariable long id,
             @RequestParam(name = "title") String title,
             @RequestParam(name = "body") String body
     ){
-            Post post = new Post(id, title, body);
-            Post dbPost = postsDao.save(post);
-        return "edited the post with the id of " + dbPost.getId();
+        //Existing information
+        Post dbPost = postsDao.getOne(id);
+        //Setting the new information
+        dbPost.setTitle(title);
+        dbPost.setBody(body);
+
+        //sending the update to the database
+        postsDao.save(dbPost);
+
+        //redirect to the specific posts page
+        return "redirect:/posts/" + dbPost.getId();
     }
 
     @GetMapping("/posts/delete")@ResponseBody

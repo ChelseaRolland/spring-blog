@@ -17,7 +17,9 @@
             <label for="postBody">Post Body</label>
             <input name = "body" type="text" class="form-control" id="postBody" th:value="${post.body}">
         </div>
-        <button type="submit" th:name="submitBtn" class="btn btn-primary">Submit</button>
+        <button type="submit" th:name="submitBtn" class="btn btn-success">Submit</button>
+    </form>
+    <form th:action="@{/posts/{id}/delete(id=${post.getId()})}" th:method="POST">
         <button type="submit" th:name="deleteEditBtn" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
     </form>
 

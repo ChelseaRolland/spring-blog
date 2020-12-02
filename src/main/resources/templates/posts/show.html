@@ -10,9 +10,9 @@
         <div class="card" style="width: 18rem;">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title" th:text="${currentPost.title}"></h5>
-                <p class="card-text" th:text="${currentPost.body}"></p>
-                <small th:class="text-muted" th:text="${currentPost.createTime}"></small>
+                <h5 class="card-title" th:text="${post.title}"></h5>
+                <p class="card-text" th:text="${post.body}"></p>
+                <small th:class="text-muted" th:text="${post.createTime}"></small>
                 <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>

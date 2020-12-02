@@ -25,10 +25,7 @@ public class PostController {
 
     @GetMapping("/posts/{id}")
     public String individualPost(@PathVariable long id, Model model){
-        Post newPost = new Post("Post " + id, "Some cool stuff " + id + ".");
-
-        model.addAttribute("currentPost", newPost);
-        System.out.println("view individual posts and the id is: " + id);
+        model.addAttribute("post", postsDao.getOne(id));
         return "posts/show";
     }
 
@@ -37,14 +34,14 @@ public class PostController {
         return "posts/new";
     }
 
-    @PostMapping("/posts/create") @ResponseBody
+    @PostMapping("/posts/create")
     public String submitPost(
             @RequestParam(name = "title") String title,
             @RequestParam(name = "body") String body
     ){
         Post post = new Post(title, body);
         Post dbPost = postsDao.save(post);
-        return "create new blog post with id " + dbPost.getId();
+        return "redirect:/posts/" + dbPost.getId();
     }
 
 
@@ -54,7 +51,7 @@ public class PostController {
         return "posts/edit";
     }
 
-    @PostMapping("/posts/{id}/edit") @ResponseBody
+    @PostMapping("/posts/{id}/edit")
     public String editPost(
             //@RequestParam(name = "postId") long id, -->Anyone can change this so put it as/in your URL
             @PathVariable long id,
@@ -71,19 +68,12 @@ public class PostController {
         postsDao.save(dbPost);
 
         //redirect to the specific posts page
-        return "redirect:/posts/" + dbPost.getId();
+        return "redirect:/posts/";
     }
 
-    @GetMapping("/posts/delete")@ResponseBody
-    public String viewDelete(){
-        return "this is the delete page";
-    }
-
-    @PostMapping("/posts/delete") @ResponseBody
-    public String deletePostById(@RequestParam(name = "postId") long id){
-        //Post post = postsDao.delete();
+    @PostMapping("/posts/{id}/delete")
+    public String deletePostById(@PathVariable long id){
         postsDao.deleteById(id);
-        //postsDao.deletePostById(id);
-        return "deleted the post with the ID of" + id;
+        return "redirect:/posts";
     }
 }

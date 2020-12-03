@@ -23,6 +23,16 @@ public class Ad {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ad")
     private List<AdImage> images;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    //new table will be created with the combining of columns of ad_id and category_id
+    @JoinTable(
+            name = "ads_categories",
+            joinColumns = {@JoinColumn(name = "ad_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")}
+    )
+    private List<AdCategory> categories;
+
+
     public Ad(){}
 
     //CREATE/INSERT
@@ -80,5 +90,13 @@ public class Ad {
 
     public void setImages(List<AdImage> images) {
         this.images = images;
+    }
+
+    public List<AdCategory> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<AdCategory> categories) {
+        this.categories = categories;
     }
 }

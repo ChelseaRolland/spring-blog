@@ -1,6 +1,7 @@
 package com.example.blog.modals;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -18,27 +19,33 @@ public class Post {
     @Column(nullable = false, columnDefinition = "TIMESTAMP")
     private String createTime;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User user;
+
     public Post(){}
 
-    //Insert
-    public Post(String aTitle, String aBody){
+    //Insert/Create
+    public Post(String aTitle, String aBody, User aUser){
         this.title = aTitle;
         this.body = aBody;
+        this.user = aUser;
     }
 
     //Update
-    public Post(long id, String title, String body) {
+    public Post(long id, String title, String body, User user) {
         this.id = id;
         this.title = title;
         this.body = body;
+        this.user = user;
     }
 
     //Search
-    public Post(long id, String title, String body, String createTime) {
+    public Post(long id, String title, String body, String createTime, User user) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.createTime = createTime;
+        this.user = user;
     }
 
     //Getters and Setters
@@ -74,5 +81,11 @@ public class Post {
         this.createTime = newCreateTime;
     }
 
+    public User getUser() {
+        return this.user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.blog.modals;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -18,22 +19,27 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Post> posts;
+
     //Constructors
     public User(){}
 
     //Insert/Create
-    public User(String email, String username, String password) {
+    public User(String email, String username, String password, List<Post> posts) {
         this.email = email;
         this.username = username;
         this.password = password;
+        this.posts = posts;
     }
 
     //Read
-    public User(long id, String email, String username, String password) {
+    public User(long id, String email, String username, String password, List<Post> posts) {
         this.id = id;
         this.email = email;
         this.username = username;
         this.password = password;
+        this.posts = posts;
     }
 
     //Getters and Setters
@@ -46,7 +52,7 @@ public class User {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -54,7 +60,7 @@ public class User {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public void setUsername(String username) {
@@ -62,10 +68,19 @@ public class User {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
+
         this.password = password;
+    }
+
+    public List<Post> getPosts() {
+        return this.posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }

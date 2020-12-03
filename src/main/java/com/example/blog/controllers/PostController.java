@@ -1,7 +1,9 @@
 package com.example.blog.controllers;
 
 import com.example.blog.modals.Post;
+import com.example.blog.modals.User;
 import com.example.blog.repos.PostRepository;
+import com.example.blog.repos.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +14,13 @@ import java.util.List;
 @Controller
 public class PostController {
     private final PostRepository postsDao;
+    private final UserRepository usersDao;
 
-    public PostController(PostRepository postsDao){
+    public PostController(PostRepository postsDao, UserRepository usersDao){
         this.postsDao = postsDao;
+        this.usersDao = usersDao;
     }
+
 
     @GetMapping("/posts")
     public String index(Model viewModel){
@@ -39,7 +44,8 @@ public class PostController {
             @RequestParam(name = "title") String title,
             @RequestParam(name = "body") String body
     ){
-        Post post = new Post(title, body);
+        User user =  usersDao.getOne(1L);
+        Post post = new Post(title, body, user);
         Post dbPost = postsDao.save(post);
         return "redirect:/posts/" + dbPost.getId();
     }

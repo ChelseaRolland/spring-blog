@@ -5,9 +5,10 @@
 <nav th:replace="partials/navbar :: nav"></nav>
 <header th:replace="partials/header :: header('All the Posts!!')"></header>
 
-    <div class="container">
-
-        <div class= "card text-center" th:each="post : ${posts}">
+<div class="container">
+    <div class="row">
+            <div class="card text-center" style="width: 18rem;" th:each="post : ${posts}">
+                <img src="..." alt="...">
                 <div class="card-body">
                     <h3 class="card-title" th:text="${post.getTitle()}"></h3>
                     <p class="card-text" th:text="${post.getBody()}"></p>
@@ -16,11 +17,11 @@
                 <div class="card-footer text-muted">
                     <th:block th:text="${post.createTime}"></th:block>
                 </div>
-        </div>
-
+            </div>
     </div>
+</div>
 
-    <footer th:replace="partials/partials :: footer"></footer>
-    <th:block th:include="partials/scripts :: scripts"></th:block>
+<footer th:replace="partials/partials :: footer"></footer>
+<th:block th:include="partials/scripts :: scripts"></th:block>
 </body>
 </html>

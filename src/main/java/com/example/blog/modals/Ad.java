@@ -16,11 +16,55 @@ public class Ad {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
+    @OneToOne
+    private User owner;
+
     public Ad(){}
 
-    public Ad(long id, String title, String description){
+    //CREATE/INSERT
+    public Ad(String title, String description, User owner) {
+        this.title = title;
+        this.description = description;
+        this.owner = owner;
+    }
+
+    //READ
+    public Ad(long id, String title, String description, User owner){
         this.id = id;
         this.title = title;
         this.description = description;
+        this.owner = owner;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

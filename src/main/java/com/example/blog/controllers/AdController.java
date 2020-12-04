@@ -1,22 +1,23 @@
 package com.example.blog.controllers;
 
 import com.example.blog.modals.Ad;
+import com.example.blog.modals.User;
 import com.example.blog.repos.AdRepository;
+import com.example.blog.repos.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
 public class AdController {
     private final AdRepository adDao;
+    private final UserRepository userDao;
 
-    public AdController(AdRepository adDao){
+    public AdController(AdRepository adDao, UserRepository userDao){
         this.adDao = adDao;
+        this.userDao = userDao;
     }
 
     @GetMapping("/ads")
@@ -40,17 +41,16 @@ public class AdController {
     }
 
     @GetMapping("/ads/create")
-    public String showCreateForm(){
+    public String showCreateForm(Model viewModel){
+        viewModel.addAttribute("ad", new Ad());
         return "ads/new";
     }
 
     @PostMapping("/ads/create")
-    public String createAd(
-            @RequestParam(name = "title") String title,
-            @RequestParam(name = "description") String desc
-    ){
-        Ad ad = new Ad(title, desc, null, null);
-        Ad dbAd = adDao.save(ad);
+    public String createAd(@ModelAttribute Ad adToBeSaved){
+        User user = userDao.getOne(1L);
+        adToBeSaved.setOwner(user);
+        Ad dbAd = adDao.save(adToBeSaved);
         return "redirect:/ads/" + dbAd.getId();
     }
 

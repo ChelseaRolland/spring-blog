@@ -7,16 +7,16 @@
     <header th:replace="partials/header :: header('New Post')"></header>
 
     <div class="container text-center">
-        <form th:action="@{/posts/create}" th:method="POST">
-            <input name="postId" type="hidden">
+
+        <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
             <div class="form-group">
                 <label for="postTitle">Post Title</label>
-                <input name="title" type="text" class="form-control" id="postTitle" aria-describedby="postTitleHelp"
+                <input th:field="*{title}" type="text" class="form-control" aria-describedby="postTitleHelp"
                        placeholder="Enter title">
             </div>
             <div class="form-group">
                 <label for="postBody">Post Body</label>
-                <input name = "body" type="text" class="form-control" id="postBody" placeholder="Enter body">
+                <input th:field="*{body}" type="text" class="form-control" aria-describedby="postBodyHelp" placeholder="Enter body">
             </div>
             <button type="submit" th:name="submitBtn" class="btn btn-primary">Submit</button>
         </form>

@@ -7,18 +7,18 @@
 <header th:replace="partials/header :: header('Edit Post')"></header>
 
 <div class="container text-center">
-    <form th:action="@{/posts/{id}/edit(id=${post.id})}" th:method="POST" th:object="${post}">
+    <form th:action="@{'/posts/' +${post.id} + '/edit'}" th:method="POST" th:object="${post}">
         <div class="form-group">
-            <label for="postTitle">Post Title</label>
+            <label for="title">Post Title</label>
             <input th:field="*{title}" type="text" class="form-control" aria-describedby="postTitleHelp">
         </div>
         <div class="form-group">
-            <label for="postBody">Post Body</label>
+            <label for="body">Post Body</label>
             <input th:field="*{body}" type="text" class="form-control" aria-describedby="postBodyHelp">
         </div>
-        <button type="submit" th:name="submitBtn" class="btn btn-success">Submit</button>
+        <button type="submit" th:name="submitBtn" class="btn btn-success">Update Post</button>
     </form>
-    <form th:action="@{/posts/{id}/delete(id=${post.getId()})}" th:method="POST">
+    <form th:action="@{|/posts/${post.id}/delete|}" th:method="POST">
         <button type="submit" th:name="deleteEditBtn" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
     </form>
 </div>

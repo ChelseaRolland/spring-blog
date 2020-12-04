@@ -4,6 +4,7 @@ import com.example.blog.modals.Post;
 import com.example.blog.modals.User;
 import com.example.blog.repos.PostRepository;
 import com.example.blog.repos.UserRepository;
+import com.example.blog.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +16,12 @@ import java.util.List;
 public class PostController {
     private final PostRepository postsDao;
     private final UserRepository usersDao;
+    private final EmailService emailService;
 
-    public PostController(PostRepository postsDao, UserRepository usersDao){
+    public PostController(PostRepository postsDao, UserRepository usersDao, EmailService emailService){
         this.postsDao = postsDao;
         this.usersDao = usersDao;
+        this.emailService = emailService;
     }
 
 
@@ -45,6 +48,7 @@ public class PostController {
         User user =  usersDao.getOne(1L);
         postToBeSaved.setUser(user);
         Post dbPost = postsDao.save(postToBeSaved);
+        emailService.prepareAndSend(dbPost, "Post has been Created", "You can find it with the id of " + dbPost.getId());
         return "redirect:/posts/" + dbPost.getId();
     }
 
@@ -56,27 +60,21 @@ public class PostController {
     }
 
     @PostMapping("/posts/{id}/edit")
-    public String editPost(
-            //@RequestParam(name = "postId") long id, -->Anyone can change this so put it as/in your URL
-            @PathVariable long id,
-            @ModelAttribute Post postToBeSaved
-    ){
-        //Existing information
-        Post dbPost = postsDao.getOne(id);
-        //Setting the new information
-        dbPost.setTitle(postToBeSaved.getTitle());
-        dbPost.setBody(postToBeSaved.getBody());
-
-        //sending the update to the database
-        postsDao.save(dbPost);
+    public String editPost(@ModelAttribute Post postToBeUpdated){
+        User user = usersDao.getOne(1L); //a user obj coming from a session
+        postToBeUpdated.setUser(user);
+        postsDao.save(postToBeUpdated);
 
         //redirect to the specific posts page
-        return "redirect:/posts/" + dbPost.getId();
+        return "redirect:/posts/" + postToBeUpdated.getId();
     }
 
     @PostMapping("/posts/{id}/delete")
-    public String deletePostById(@PathVariable long id){
-        postsDao.deleteById(id);
+    public String deletePostById(@PathVariable long id, @ModelAttribute Post postToBeDeleted){
+        User user = usersDao.getOne(1L);
+        postToBeDeleted.setUser(user);
+        System.out.println("Does this run?");
+        postsDao.deleteById(postToBeDeleted.getId());
         return "redirect:/posts";
     }
 

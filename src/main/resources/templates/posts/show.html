@@ -17,6 +17,9 @@
                 <p>Email: <span th:text="${post.user.email}"></span></p>
                 <a th:href="@{/posts}" class="btn btn-outline-info"><i class="fas fa-arrow-circle-left"></i></a>
                 <a th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-outline-warning"><i class="fas fa-edit"></i></a>
+                <form th:action="@{/posts/{id}/delete(id=${post.id})}" th:method="POST">
+                    <button type="submit" th:name="deleteEditBtn" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                </form>
             </div>
         </div>
     </div>

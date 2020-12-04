@@ -59,14 +59,13 @@ public class PostController {
     public String editPost(
             //@RequestParam(name = "postId") long id, -->Anyone can change this so put it as/in your URL
             @PathVariable long id,
-            @RequestParam(name = "title") String title,
-            @RequestParam(name = "body") String body
+            @ModelAttribute Post postToBeSaved
     ){
         //Existing information
         Post dbPost = postsDao.getOne(id);
         //Setting the new information
-        dbPost.setTitle(title);
-        dbPost.setBody(body);
+        dbPost.setTitle(postToBeSaved.getTitle());
+        dbPost.setBody(postToBeSaved.getBody());
 
         //sending the update to the database
         postsDao.save(dbPost);
@@ -78,6 +77,19 @@ public class PostController {
     @PostMapping("/posts/{id}/delete")
     public String deletePostById(@PathVariable long id){
         postsDao.deleteById(id);
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/rick-roll")
+    public String rickRoll(){
+        // redirecting to an absolute url
+        return "redirect:https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+    }
+
+    @GetMapping("/redirect-me")
+    public String redirect() {
+        // a relative (to the base domain) redirect, usually you will use this version
+        // Will redirect the users to `/about`
         return "redirect:/posts";
     }
 }

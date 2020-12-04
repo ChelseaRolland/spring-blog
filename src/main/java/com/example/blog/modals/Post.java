@@ -19,7 +19,7 @@ public class Post {
     @Column(nullable = false, columnDefinition = "TIMESTAMP")
     private String createTime;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User user;
 
     public Post(){}

@@ -19,7 +19,7 @@
         <button type="submit" th:name="submitBtn" class="btn btn-success">Update Post</button>
     </form>
     <form th:action="@{|/posts/${post.id}/delete|}" th:method="POST">
-        <button type="submit" th:name="deleteEditBtn" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+        <button type="submit" th:id="${post.id}" th:name="deleteEditBtn" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
     </form>
 </div>
 

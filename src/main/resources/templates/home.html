@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="partials/partials :: head"></head>
+<head th:replace="partials/head :: head('Home')"></head>
 
 <body>
-<header th:replace="partials/partials :: header"></header>
-    <h1>Welcome to your Home page!</h1>
+<nav th:replace="partials/navbar :: nav"></nav>
+<header th:replace="partials/header :: header('Welcome to Log Lists')"></header>
 
-
-    <footer th:replace="partials/partials :: footer"></footer>
+    <footer th:replace="partials/footer :: footer"></footer>
+    <th:block th:include="partials/scripts :: scripts"></th:block>
 </body>
 </html>

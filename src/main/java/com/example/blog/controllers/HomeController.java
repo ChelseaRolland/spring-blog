@@ -18,7 +18,7 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String welcome(){ return "/home";}
+    public String welcome(){ return "home";}
 
     @GetMapping("/join")
     public String showJoinForm(Model model){
@@ -28,13 +28,13 @@ public class HomeController {
         cohortNames.add("Io");
 
         model.addAttribute("cohortNames", cohortNames);
-        return "/join";
+        return "join";
     }
 
     @PostMapping("/join")
     public String postJoinForm(@RequestParam(name = "cohort") String cohort, Model model){
         model.addAttribute("cohort", "Welcome to " + cohort + "!");
-        return "/join";
+        return "join";
     }
 
 

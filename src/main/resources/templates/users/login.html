@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Log In</title>
-    </head>
+<head th:replace="partials/head :: head('Login In')"></head>
     <body>
+
+    <nav th:replace="partials/navbar :: nav"></nav>
+    <header th:replace="partials/header :: header('Login!!')"></header>
         <h1>Log In</h1>
         <div th:if="${param.error}">
             Invalid Username and Password.
@@ -12,13 +12,30 @@
         <div th:if="${param.logout}">
             You have been logged out.
         </div>
-
-        <form th:action="@{/login}" method="post">
-            <label for="username">Username</label>
-            <input id="username" name="username" type="text" />
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password" />
-            <input type="submit" value="Log In" />
+    <div class="container">
+        <form th:action="@{/login}" method="POST">
+            <img src="http://cdn.onlinewebfonts.com/svg/img_549877.png" alt="" width="72">
+            <h1 class="h3 mb-3 fw-normal">Please Sign In</h1>
+            <div class="form-group">
+                <label for="username" class="visually-hidden">Username</label>
+                <input id="username" name="username" type="text" class="form-control" placeholder="Username" required autofocus />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" class="form-control" placeholder="Password" required />
+            </div>
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <input type="submit" class="w-100 btn btn-lg btn-outline-success" value="Log In" />
+            <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
         </form>
+    </div>
+
+    <footer th:replace="partials/partials :: footer"></footer>
+    <th:block th:include="partials/scripts :: scripts"></th:block>
+
     </body>
 </html>

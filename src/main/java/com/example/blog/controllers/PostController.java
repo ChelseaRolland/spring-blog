@@ -5,6 +5,7 @@ import com.example.blog.modals.User;
 import com.example.blog.repos.PostRepository;
 import com.example.blog.repos.UserRepository;
 import com.example.blog.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -45,8 +46,8 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String submitPost(@ModelAttribute Post postToBeSaved){
-        User user =  usersDao.getOne(1L);
-        postToBeSaved.setUser(user);
+        User userDb = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        postToBeSaved.setUser(userDb);
         Post dbPost = postsDao.save(postToBeSaved);
         emailService.prepareAndSend(dbPost, "Post has been Created", "You can find it with the id of " + dbPost.getId());
         return "redirect:/posts/" + dbPost.getId();

@@ -4,6 +4,7 @@ import com.example.blog.modals.Ad;
 import com.example.blog.modals.User;
 import com.example.blog.repos.AdRepository;
 import com.example.blog.repos.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -48,8 +49,8 @@ public class AdController {
 
     @PostMapping("/ads/create")
     public String createAd(@ModelAttribute Ad adToBeSaved){
-        User user = userDao.getOne(1L);
-        adToBeSaved.setOwner(user);
+        User userDb = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        adToBeSaved.setOwner(userDb);
         Ad dbAd = adDao.save(adToBeSaved);
         return "redirect:/ads/" + dbAd.getId();
     }

@@ -32,6 +32,14 @@ public class PostController {
         return "posts/index";
     }
 
+    @GetMapping("/posts/search")
+    public String search(@RequestParam(name = "term") String term, Model viewModel){
+        term = "%" + term + "%";
+        List<Post> dbPosts = postsDao.findAllByTitleIsLike(term);
+        viewModel.addAttribute("posts", dbPosts);
+        return "posts/index";
+    }
+
     @GetMapping("/posts/{id}")
     public String individualPost(@PathVariable long id, Model model){
         model.addAttribute("post", postsDao.getOne(id));
@@ -62,8 +70,8 @@ public class PostController {
 
     @PostMapping("/posts/{id}/edit")
     public String editPost(@ModelAttribute Post postToBeUpdated){
-        User user = usersDao.getOne(1L); //a user obj coming from a session
-        postToBeUpdated.setUser(user);
+        User userDb = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        postToBeUpdated.setUser(userDb);
         postsDao.save(postToBeUpdated);
 
         //redirect to the specific posts page

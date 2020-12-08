@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="partials/head :: head('Profile')"></head>
+<body>
+    <nav th:replace="partials/navbar :: nav"></nav>
+    <header th:replace="partials/header :: header('Sign Up Here!!')"></header>
+
+    <div class="container-fluid">
+        <div class="jumbrotron">
+            <img src="http://4.bp.blogspot.com/-a2ADYMu0TSo/UZGYNURy4wI/AAAAAAAADdk/r8LUpQx3z1o/s1600/Cute-puppies+(1).jpg" alt="">
+        </div>
+
+        <div class="row">
+            <div class="col-5">
+                <div class="rounded-circle">
+                    <img src="http://wallpoper.com/images/00/41/54/33/dogs-puppies_00415433.jpg" alt="">
+                    <span class="badge rounded-pill bg-primary">Primary</span>
+                </div>
+                <div class="row">
+                    <div class="col">USERNAME</div>
+                    <div class="col">FULL NAME</div>
+                    <div class="col">EMAIL</div>
+                    <div class="col">CONTACT #</div>
+                    <div class="col">
+                        <ul>
+                            <li>FACEBOOK</li>
+                            <li>INSTAGRAM</li>
+                            <li>TIC TOK</li>
+                            <li>TWITTER</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-7">
+                <section>ABOUT ME</section>
+                <section>USER RECENT ADS</section>
+            </div>
+        </div>
+        
+
+
+
+    </div>
+
+
+
+    <footer th:replace="partials/footer :: footer"></footer>
+    <th:block th:include="partials/scripts :: scripts"></th:block>
+</body>
+</html>

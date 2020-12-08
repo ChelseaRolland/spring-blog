@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="partials/head :: head('Individual Post')">
 </head>
 <body>
 <nav th:replace="partials/navbar :: nav"></nav>
 <header th:replace="partials/header :: header('Individual Blog Post!!')"></header>
+
+<div sec:authorize="isAuthenticated()">
 <main>
     <div class="container">
         <div class="card" style="width: 18rem;">
@@ -16,11 +19,17 @@
                 <p>Created By: <span th:text="${post.user.username}"></span></p>
                 <p>Email: <span th:text="${post.user.email}"></span></p>
                 <a th:href="@{/posts}" class="btn btn-outline-info"><i class="fas fa-arrow-circle-left"></i></a>
-                <a th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-outline-warning"><i class="fas fa-edit"></i></a>
+                <div class="d-inline" th:if="${#authentication.principal.id == post.user.id}">
+                    <a th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-outline-warning"><i class="fas fa-edit"></i></a>
+                     <form th:action="@{|/posts/${post.id}/delete|}" class="d-inline" th:method="POST">
+        <button type="submit" th:id="${post.id}" th:name="deleteEditBtn" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+    </form>
+                </div>
             </div>
         </div>
     </div>
 </main>
+</div>
 
 <footer th:replace="partials/footer :: footer"></footer>
 <th:block th:include="partials/scripts :: scripts"></th:block>

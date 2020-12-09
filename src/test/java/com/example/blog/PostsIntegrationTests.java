@@ -49,8 +49,8 @@ public class PostsIntegrationTests {
     public void setup() throws Exception {
 
         testUser = userDao.findByUsername("testUser");
-
-        // Creates the test user if not exists
+//
+//        // Creates the test user if not exists
         if(testUser == null){
             User newUser = new User();
             newUser.setUsername("testUser");

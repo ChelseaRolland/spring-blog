@@ -77,6 +77,7 @@ public class PostController {
 
         //redirect to the specific posts page
         return "redirect:/posts/" + postToBeUpdated.getId();
+        //return "redirect:/posts/" + postToBeUpdated.getCategories();
     }
 
     @PostMapping("/posts/{id}/delete")
